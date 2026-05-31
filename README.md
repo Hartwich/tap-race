@@ -13,8 +13,10 @@ Recommended folder layout:
 ```text
 Open-Party-Lab/
   local-games/
-    open-party-game-tap-race/
+    tap-race/
 ```
+
+The legacy `local-games/open-party-game-tap-race/` folder name also works, but new game repos should use only the game name.
 
 Install and build this game:
 
