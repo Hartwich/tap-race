@@ -2,6 +2,10 @@
 
 Tap Race is a small Open Party Lab game package. Players tap as fast as possible on their phone controller while the shared host screen renders the race.
 
+## Screenshot
+
+![Tap Race in-game host screen](docs/images/tap-race-ingame.png)
+
 ## Local Development
 
 Recommended folder layout:
