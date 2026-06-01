@@ -47,7 +47,9 @@ jobs:
         working-directory: game
         run: |
           mkdir -p node_modules/@open-party-lab
-          ln -s "$GITHUB_WORKSPACE/platform/packages/game-core" node_modules/@open-party-lab/game-core
+          for package in game-core protocol ui-kit utils; do
+            ln -sfn "$GITHUB_WORKSPACE/platform/packages/$package" "node_modules/@open-party-lab/$package"
+          done
 
       - name: Run typecheck
         working-directory: game
