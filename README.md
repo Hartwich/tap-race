@@ -17,7 +17,7 @@ Recommended layout:
 ```text
 Open-Party-Lab/
   local-games/
-    open-party-game-tap-race/
+    tap-race/
 ```
 
 From the Platform repo:
