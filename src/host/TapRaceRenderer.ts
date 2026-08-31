@@ -1,5 +1,6 @@
 ﻿import Phaser from "phaser";
 import type { SupportedLanguage } from "@open-party-lab/game-core";
+import { tokens } from "./platformTheme.js";
 
 interface TapRaceRenderState {
   targetTaps?: number;
@@ -12,7 +13,9 @@ interface TapRaceRenderState {
 const hostTheme = {
   titleFont: "Trebuchet MS, Arial, sans-serif",
   bodyFont: "Trebuchet MS, Arial, sans-serif",
-  text: "#f8fafc"
+  get text() {
+    return tokens().color.text;
+  }
 };
 
 const lanePalette = ["#38bdf8", "#f97316", "#a78bfa", "#34d399", "#facc15", "#fb7185"];
@@ -60,7 +63,7 @@ export function renderTapRaceState(
     .text(scene.scale.width / 2, 128, subtitle, {
       fontFamily: hostTheme.bodyFont,
       fontSize: "30px",
-      color: "#cbd5e1",
+      color: tokens().color.textSoft,
       align: "center"
     })
     .setOrigin(0.5, 0);
@@ -86,7 +89,7 @@ export function renderTapRaceState(
     .text(scene.scale.width / 2, bottom + 30, `${en ? "Target" : "Ziel"}: ${targetTaps} ${en ? "taps" : "Klicks"}`, {
       fontFamily: hostTheme.bodyFont,
       fontSize: "26px",
-      color: "#94a3b8"
+      color: tokens().color.muted
     })
     .setOrigin(0.5, 0.5);
 

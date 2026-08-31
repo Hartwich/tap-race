@@ -10,7 +10,11 @@ export const tapRaceManifest = {
   controllerView: "tap-race",
   controllerLayout: "tap_mash",
   supportsTeams: false,
-  estimatedRoundDurationMs: 10_000
+  estimatedRoundDurationMs: 10_000,
+
+  ownsScreens: ["round_intro", "result"],
+  visual: { accent: "#5b8f7d", eyebrow: "Mash" },
+  audio: { track: { profile: "arcade", bpm: 148, rootMidi: 65, masterGain: 0.16 } },
 } as const satisfies GameManifest;
 
 export const manifest = tapRaceManifest;
