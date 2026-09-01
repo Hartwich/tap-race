@@ -13,7 +13,7 @@ export const tapRaceManifest = {
   estimatedRoundDurationMs: 10_000,
 
   ownsScreens: ["round_intro", "result"],
-  visual: { accent: "#5b8f7d", eyebrow: "Mash" },
+  visual: { accent: "#5b8f7d", icon: "hand", eyebrow: "Mash" },
   audio: { track: { profile: "arcade", bpm: 148, rootMidi: 65, masterGain: 0.16 } },
 } as const satisfies GameManifest;
 
