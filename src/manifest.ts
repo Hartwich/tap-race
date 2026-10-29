@@ -1,7 +1,9 @@
+import { tapRaceText } from "./catalogText.js";
 ﻿import type { GameManifest } from "@open-party-lab/game-core";
 
 export const tapRaceManifest = {
   id: "tap-race",
+  translations: tapRaceText,
   displayName: "Tap Race",
   description: "Tippe schneller als die anderen bis zum Ziel.",
   minPlayers: 1,

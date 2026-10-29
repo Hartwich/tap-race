@@ -175,7 +175,7 @@ export const serverGame: ServerGame<TapRaceState, TapRaceInput> = {
   isRoundFinished(state) {
     return state.phase === "locked";
   },
-  buildScore(state) {
-    return buildTapRaceScore(state);
+  buildScore(state, context) {
+    return buildTapRaceScore(state).map(entry => ({ ...entry, reason: context.language === "en" ? "Tap Race win" : "Tap Race Sieg" }));
   }
 };
