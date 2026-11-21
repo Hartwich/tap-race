@@ -32,6 +32,36 @@ const tapRaceText = {
     fallbackPlayer: "A player",
     targetReached: (name: string) => `${name} reaches the target first.`,
     wins: (name: string) => `${name} wins the Tap Race.`
+  },
+  es: {
+    ready: "Preparados, listos...",
+    playing: "¡Toca, toca, toca!",
+    keepGoing: "¡Sigue tocando!",
+    noInput: "No hubo entradas. Esta ronda no cuenta.",
+    unknown: "Desconocido",
+    fallbackPlayer: "Un jugador",
+    targetReached: (name: string) => `${name} llega primero a la meta.`,
+    wins: (name: string) => `${name} gana Tap Race.`
+  },
+  fr: {
+    ready: "À vos marques, prêts...",
+    playing: "Tapez, tapez, tapez !",
+    keepGoing: "Continuez à taper !",
+    noInput: "Aucune action. Cette manche ne compte pas.",
+    unknown: "Inconnu",
+    fallbackPlayer: "Un joueur",
+    targetReached: (name: string) => `${name} atteint la cible en premier.`,
+    wins: (name: string) => `${name} remporte Tap Race.`
+  },
+  "pt-BR": {
+    ready: "Preparar, apontar...",
+    playing: "Toque, toque, toque!",
+    keepGoing: "Continue tocando!",
+    noInput: "Nenhum toque. Esta rodada não conta.",
+    unknown: "Desconhecido",
+    fallbackPlayer: "Um jogador",
+    targetReached: (name: string) => `${name} chega primeiro ao objetivo.`,
+    wins: (name: string) => `${name} venceu o Tap Race.`
   }
 } satisfies Record<SupportedLanguage, {
   ready: string;
@@ -57,7 +87,7 @@ function createInitialTapMap(playerIds: string[]): Record<string, number> {
 export const serverGame: ServerGame<TapRaceState, TapRaceInput> = {
   manifest: tapRaceManifest,
   createInitialState(context) {
-    const text = tapRaceText[context.language];
+    const text = tapRaceText[context.language] ?? tapRaceText.en;
 
     return {
       ...createBaseRoundState("round_intro", context.now, {
@@ -70,7 +100,7 @@ export const serverGame: ServerGame<TapRaceState, TapRaceInput> = {
     };
   },
   startRound(state, context) {
-    const text = tapRaceText[context.language];
+    const text = tapRaceText[context.language] ?? tapRaceText.en;
 
     return transitionRoundState(
       {
@@ -102,7 +132,7 @@ export const serverGame: ServerGame<TapRaceState, TapRaceInput> = {
       [input.playerId]: nextTapCount
     };
     const actingPlayer = context.players.find((player) => player.id === input.playerId);
-    const text = tapRaceText[context.language];
+    const text = tapRaceText[context.language] ?? tapRaceText.en;
 
     if (nextTapCount >= state.targetTaps) {
       return transitionRoundState(
@@ -148,13 +178,13 @@ export const serverGame: ServerGame<TapRaceState, TapRaceInput> = {
         context.now,
         {
           durationMs: roundPhaseDurations.lockedMs,
-          message: tapRaceText[context.language].noInput
+          message: (tapRaceText[context.language] ?? tapRaceText.en).noInput
         }
       );
     }
 
     const actingPlayer = context.players.find((player) => player.id === winnerEntry[0]);
-    const text = tapRaceText[context.language];
+    const text = tapRaceText[context.language] ?? tapRaceText.en;
 
     return transitionRoundState(
       {
@@ -176,6 +206,6 @@ export const serverGame: ServerGame<TapRaceState, TapRaceInput> = {
     return state.phase === "locked";
   },
   buildScore(state, context) {
-    return buildTapRaceScore(state).map(entry => ({ ...entry, reason: context.language === "en" ? "Tap Race win" : "Tap Race Sieg" }));
+    return buildTapRaceScore(state).map(entry => ({ ...entry, reason: (tapRaceText[context.language] ?? tapRaceText.en).wins(state.winnerName ?? (tapRaceText[context.language] ?? tapRaceText.en).unknown) }));
   }
 };

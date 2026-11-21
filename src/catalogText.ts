@@ -14,5 +14,8 @@ export const tapRaceText = {
     "visual": {
       "eyebrow": "Mash"
     }
-  }
+  },
+  "es": { "displayName": "Tap Race", "description": "Toca más rápido que los demás para llegar primero a la meta.", "visual": { "eyebrow": "Toques" } },
+  "fr": { "displayName": "Tap Race", "description": "Tapez plus vite que les autres pour franchir la ligne d’arrivée en premier.", "visual": { "eyebrow": "Tapotement" } },
+  "pt-BR": { "displayName": "Tap Race", "description": "Toque mais rápido que os outros para chegar primeiro à linha de chegada.", "visual": { "eyebrow": "Toques" } }
 } as const satisfies LocalizedGameTextMap;

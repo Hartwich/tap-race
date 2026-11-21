@@ -36,19 +36,25 @@ export function renderTapRaceState(
   playerNames: Record<string, string>,
   language?: SupportedLanguage
 ): void {
-  const en = language === "en";
+  const words = {
+    de: { wins: "gewinnt!", title: "Leiter-Rennen", reached: "Klicks erreicht", subtitle: "Klickt schnell, um die Leiter hochzuklettern.", wait: "Warte auf Spieler ...", target: "Ziel", taps: "Klicks" },
+    en: { wins: "wins!", title: "Ladder Race", reached: "taps reached", subtitle: "Tap quickly to climb the ladder.", wait: "Waiting for players ...", target: "Target", taps: "taps" },
+    es: { wins: "¡gana!", title: "Carrera de escalera", reached: "toques alcanzados", subtitle: "Toca rápido para subir la escalera.", wait: "Esperando jugadores...", target: "Meta", taps: "toques" },
+    fr: { wins: "gagne !", title: "Course à l’échelle", reached: "tapes atteintes", subtitle: "Tapez vite pour grimper à l’échelle.", wait: "En attente des joueurs...", target: "Objectif", taps: "tapes" },
+    "pt-BR": { wins: "venceu!", title: "Corrida da escada", reached: "toques alcançados", subtitle: "Toque rápido para subir a escada.", wait: "Aguardando jogadores...", target: "Meta", taps: "toques" }
+  }[language ?? "de"];
   const targetTaps = state.targetTaps ?? 50;
   const tapsByPlayer = state.tapsByPlayer ?? {};
   const playerIds = Object.keys(tapsByPlayer);
   const hasPlayers = playerIds.length > 0;
 
   const title = state.winnerName
-    ? en ? `${state.winnerName} wins!` : `${state.winnerName} gewinnt!`
-    : en ? "Ladder Race" : "Leiter-Rennen";
+    ? `${state.winnerName} ${words.wins}`
+    : words.title;
 
   const subtitle = state.winnerName
-    ? `${state.winningTapCount ?? 0}/${targetTaps} ${en ? "taps reached" : "Klicks erreicht"}`
-    : state.message ?? (en ? "Tap quickly to climb the ladder." : "Klickt schnell, um die Leiter hochzuklettern.");
+    ? `${state.winningTapCount ?? 0}/${targetTaps} ${words.reached}`
+    : state.message ?? words.subtitle;
 
   scene.add
     .text(scene.scale.width / 2, 60, title, {
@@ -70,7 +76,7 @@ export function renderTapRaceState(
 
   if (!hasPlayers) {
     scene.add
-      .text(scene.scale.width / 2, scene.scale.height / 2, en ? "Waiting for players ..." : "Warte auf Spieler ...", {
+      .text(scene.scale.width / 2, scene.scale.height / 2, words.wait, {
         fontFamily: hostTheme.bodyFont,
         fontSize: "34px",
         color: hostTheme.text
@@ -86,7 +92,7 @@ export function renderTapRaceState(
   const laneWidth = (right - left) / playerIds.length;
 
   scene.add
-    .text(scene.scale.width / 2, bottom + 30, `${en ? "Target" : "Ziel"}: ${targetTaps} ${en ? "taps" : "Klicks"}`, {
+    .text(scene.scale.width / 2, bottom + 30, `${words.target}: ${targetTaps} ${words.taps}`, {
       fontFamily: hostTheme.bodyFont,
       fontSize: "26px",
       color: tokens().color.muted
