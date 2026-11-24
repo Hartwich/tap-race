@@ -1,12 +1,14 @@
 # Tap Race
 
-Fast tap-mash race for Open Party Lab where players sprint by tapping their phone controller.
+Fast tap-mash race for Open Party Lab where players climb a mountainside by tapping their phone controller.
 
 ![In-game screenshot](docs/screenshots/host.png)
 
 ## Status
 
 Alpha. The core tap race loop is playable through Open Party Lab. Needs more playtesting for pacing, accessibility, and host feedback polish.
+
+The shared screen renders the ladders, cliff, finish line, and animated climbers in real time with Three.js. The alpine sunrise backdrop was created for Tap Race with ImageGen and is bundled locally. The host switches to a 2D race view when WebGL 2 is unavailable.
 
 ## Run Through Open Party Lab
 
@@ -41,7 +43,7 @@ Fast tap-mash race for Open Party Lab where players sprint by tapping their phon
 Suggested topics:
 
 ```text
-open-party-lab party-game browser-game phaser typescript local-multiplayer tap-race
+open-party-lab party-game browser-game threejs typescript local-multiplayer tap-race
 ```
 
 ## Package Entrypoints
